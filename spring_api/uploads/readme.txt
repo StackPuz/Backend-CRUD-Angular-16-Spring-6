@@ -1,0 +1,1 @@
+Move this folder to the location of "path.upload" value in /src/main/resources/application.properties
