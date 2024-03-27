@@ -97,6 +97,8 @@ public class BrandController {
     @RequestMapping("/{id}/edit")
     public ResponseEntity<?> Edit(@PathVariable Integer id, Model model) {
         Brand brand = em.find(Brand.class, id);
+        List<Product> brandProducts = em.createQuery("SELECT product FROM Brand brand join brand.products product WHERE brand.id = :id", Product.class).setParameter("id", id).getResultList();
+        model.addAttribute("brandProducts", brandProducts);
         model.addAttribute("brand", brand);
         return ResponseEntity.ok(model);
     }
@@ -116,6 +118,8 @@ public class BrandController {
     @RequestMapping("/{id}/delete")
     public ResponseEntity<?> Delete(@PathVariable Integer id, Model model) {
         Brand brand = em.find(Brand.class, id);
+        List<Product> brandProducts = em.createQuery("SELECT product FROM Brand brand join brand.products product WHERE brand.id = :id", Product.class).setParameter("id", id).getResultList();
+        model.addAttribute("brandProducts", brandProducts);
         model.addAttribute("brand", brand);
         return ResponseEntity.ok(model);
     }

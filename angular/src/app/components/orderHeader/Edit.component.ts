@@ -29,6 +29,31 @@ import { Util } from '../../util.service'
                 <span *ngIf="errors.orderDate" class="text-danger">{{errors.orderDate}}</span>
               </div>
               <div class="col-12">
+                <table class="table table-sm table-striped table-hover">
+                  <thead>
+                    <tr>
+                      <th>No</th>
+                      <th>Product</th>
+                      <th>Qty</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let orderHeaderOrderDetail of orderHeaderOrderDetails">
+                      <td class="text-center">{{orderHeaderOrderDetail.id && orderHeaderOrderDetail.id.no}}</td>
+                      <td>{{orderHeaderOrderDetail.product && orderHeaderOrderDetail.product.name}}</td>
+                      <td class="text-right">{{orderHeaderOrderDetail.qty}}</td>
+                      <td class="text-center">
+                        <a class="btn btn-sm btn-primary" routerLink="/orderDetail/edit/{{orderHeaderOrderDetail.id.orderId}}/{{orderHeaderOrderDetail.id.no}}" title="Edit"><i class="fa fa-pencil"></i></a>
+                        <a class="btn btn-sm btn-danger" routerLink="/orderDetail/delete/{{orderHeaderOrderDetail.id.orderId}}/{{orderHeaderOrderDetail.id.no}}" title="Delete"><i class="fa fa-times"></i></a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <a class="btn btn-sm btn-primary" (click)="util.goto($event)" href="/orderDetail/create?order_detail_order_id={{orderHeader.id}}">Add</a>
+                <hr />
+              </div>
+              <div class="col-12">
                 <a class="btn btn-sm btn-secondary" (click)="util.goBack('/orderHeader', $event)" routerLink="/orderHeader">Cancel</a>
                 <button class="btn btn-sm btn-primary">Submit</button>
               </div>
@@ -41,6 +66,7 @@ import { Util } from '../../util.service'
 export class OrderHeaderEdit {
   
   orderHeader?: any = {customer:{}}
+  orderHeaderOrderDetails?: any[]
   customers?: any[]
   errors?: any = {}
   constructor(private router: Router, private route: ActivatedRoute, private OrderHeaderService: OrderHeaderService, public util: Util) { }
@@ -57,6 +83,7 @@ export class OrderHeaderEdit {
         data.orderHeader.customer = {}
       }
       this.orderHeader = data.orderHeader
+      this.orderHeaderOrderDetails = data.orderHeaderOrderDetails
       this.customers = data.customers
     })
   }

@@ -23,17 +23,17 @@ import java.util.List;
 public class Product implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @JsonView({BrandDetail.class,OrderDetailCreate.class,OrderDetailEdit.class,ProductIndex.class,ProductDetail.class,ProductEdit.class,ProductDelete.class})
+    @JsonView({BrandEdit.class,OrderDetailCreate.class,OrderDetailEdit.class,ProductIndex.class,ProductDetail.class,ProductEdit.class,ProductDelete.class})
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
 
-    @JsonView({BrandDetail.class,OrderDetailCreate.class,OrderDetailEdit.class,OrderDetailDelete.class,OrderHeaderDetail.class,ProductIndex.class,ProductDetail.class,ProductCreate.class,ProductEdit.class,ProductDelete.class})
+    @JsonView({BrandDetail.class,BrandEdit.class,BrandDelete.class,OrderDetailCreate.class,OrderDetailEdit.class,OrderDetailDelete.class,OrderHeaderDetail.class,OrderHeaderEdit.class,OrderHeaderDelete.class,ProductIndex.class,ProductDetail.class,ProductCreate.class,ProductEdit.class,ProductDelete.class})
     @NotBlank
     @Size(max=50)
     private String name;
 
-    @JsonView({BrandDetail.class,ProductIndex.class,ProductDetail.class,ProductCreate.class,ProductEdit.class,ProductDelete.class})
+    @JsonView({BrandDetail.class,BrandEdit.class,BrandDelete.class,ProductIndex.class,ProductDetail.class,ProductCreate.class,ProductEdit.class,ProductDelete.class})
     @NotNull
     private BigDecimal price;
 

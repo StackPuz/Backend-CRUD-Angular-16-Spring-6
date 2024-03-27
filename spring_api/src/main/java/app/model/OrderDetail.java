@@ -14,23 +14,23 @@ import org.hibernate.annotations.NotFoundAction;
 public class OrderDetail implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @JsonView({OrderDetailCreate.class,OrderDetailEdit.class,OrderDetailDelete.class,OrderHeaderDetail.class})
+    @JsonView({OrderDetailCreate.class,OrderDetailEdit.class,OrderDetailDelete.class,OrderHeaderDetail.class,OrderHeaderEdit.class,OrderHeaderDelete.class})
     @EmbeddedId
     private OrderDetailPK id;
 
-    @JsonView({OrderDetailCreate.class,OrderDetailEdit.class,OrderDetailDelete.class,OrderHeaderDetail.class})
+    @JsonView({OrderDetailCreate.class,OrderDetailEdit.class,OrderDetailDelete.class,OrderHeaderEdit.class})
     @ManyToOne
     @NotFound(action = NotFoundAction.IGNORE)
     @JoinColumn(name="order_id", insertable=false, updatable=false)
     private OrderHeader orderHeader;
 
-    @JsonView({OrderDetailCreate.class,OrderDetailEdit.class,OrderDetailDelete.class,OrderHeaderDetail.class})
+    @JsonView({OrderDetailCreate.class,OrderDetailEdit.class,OrderDetailDelete.class,OrderHeaderDetail.class,OrderHeaderEdit.class,OrderHeaderDelete.class})
     @ManyToOne
     @NotFound(action = NotFoundAction.IGNORE)
     @JoinColumn(name="product_id")
     private Product product;
 
-    @JsonView({OrderDetailCreate.class,OrderDetailEdit.class,OrderDetailDelete.class,OrderHeaderDetail.class})
+    @JsonView({OrderDetailCreate.class,OrderDetailEdit.class,OrderDetailDelete.class,OrderHeaderDetail.class,OrderHeaderEdit.class,OrderHeaderDelete.class})
     @NotNull
     private Short qty;
 

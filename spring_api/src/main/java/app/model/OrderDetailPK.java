@@ -11,12 +11,12 @@ import jakarta.validation.constraints.NotNull;
 public class OrderDetailPK implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @JsonView({OrderDetailCreate.class,OrderDetailEdit.class,OrderDetailDelete.class,OrderHeaderDetail.class})
+    @JsonView({OrderDetailCreate.class,OrderDetailEdit.class,OrderDetailDelete.class,OrderHeaderEdit.class})
     @NotNull
     @Column(name="order_id")
     private Integer orderId;
 
-    @JsonView({OrderDetailCreate.class,OrderDetailEdit.class,OrderDetailDelete.class,OrderHeaderDetail.class})
+    @JsonView({OrderDetailCreate.class,OrderDetailEdit.class,OrderDetailDelete.class,OrderHeaderDetail.class,OrderHeaderEdit.class,OrderHeaderDelete.class})
     @NotNull
     private Short no;
 

@@ -101,7 +101,9 @@ public class OrderHeaderController {
     @RequestMapping("/{id}/edit")
     public ResponseEntity<?> Edit(@PathVariable Integer id, Model model) {
         OrderHeader orderHeader = em.find(OrderHeader.class, id);
+        List<OrderDetail> orderHeaderOrderDetails = em.createQuery("SELECT orderDetail FROM OrderHeader orderHeader join orderHeader.orderDetails orderDetail WHERE orderHeader.id = :id", OrderDetail.class).setParameter("id", id).getResultList();
         List<Customer> customers = em.createQuery("SELECT c FROM Customer c", Customer.class).getResultList();
+        model.addAttribute("orderHeaderOrderDetails", orderHeaderOrderDetails);
         model.addAttribute("customers", customers);
         model.addAttribute("orderHeader", orderHeader);
         return ResponseEntity.ok(model);
@@ -123,6 +125,8 @@ public class OrderHeaderController {
     @RequestMapping("/{id}/delete")
     public ResponseEntity<?> Delete(@PathVariable Integer id, Model model) {
         OrderHeader orderHeader = em.find(OrderHeader.class, id);
+        List<OrderDetail> orderHeaderOrderDetails = em.createQuery("SELECT orderDetail FROM OrderHeader orderHeader join orderHeader.orderDetails orderDetail WHERE orderHeader.id = :id", OrderDetail.class).setParameter("id", id).getResultList();
+        model.addAttribute("orderHeaderOrderDetails", orderHeaderOrderDetails);
         model.addAttribute("orderHeader", orderHeader);
         return ResponseEntity.ok(model);
     }
